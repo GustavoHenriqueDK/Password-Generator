@@ -7,7 +7,6 @@ import com.example.passwordgenerator.controller.MainActivityController
 import com.github.rtoshiro.util.format.SimpleMaskFormatter
 import com.github.rtoshiro.util.format.text.MaskTextWatcher
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,8 +26,26 @@ class MainActivity : AppCompatActivity() {
 
     private fun test() {
         buttonGeneratePassword.setOnClickListener {
-            val random = Random 
-            Log.e("testing", random.nextInt(10).toString())
+            val mainActivityController = MainActivityController()
+            if (mainActivityController.generateRandomPassword(
+                    editTextPasswordLength,
+                    checkBoxUppercase,
+                    checkBoxLowercase,
+                    checkBoxNumbers,
+                    checkBoxSymbols
+                ) == MainActivityController.PASSWORD_LENGTH_INVALID
+            ) {
+                textInputLayoutPasswordLength.error = "Quantidade de caracteres inválida"
+            } else {
+                textInputLayoutPasswordLength.error = null
+                Log.e("testing", mainActivityController.generateRandomPassword(
+                    editTextPasswordLength,
+                    checkBoxUppercase,
+                    checkBoxLowercase,
+                    checkBoxNumbers,
+                    checkBoxSymbols
+                ))
+            }
         }
     }
 }
