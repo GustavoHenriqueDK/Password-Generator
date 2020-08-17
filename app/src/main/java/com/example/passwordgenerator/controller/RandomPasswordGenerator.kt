@@ -30,35 +30,34 @@ class RandomPasswordGenerator {
 
     fun generate(
         editText: EditText,
-        checkBoxUpperCase: CheckBox,
-        checkBoxLowerCase: CheckBox,
-        checkBoxNumbersCase: CheckBox,
-        checkBoxSymbols: CheckBox
+        checkBoxUppercase: CheckBox,
+        checkBoxLowercase: CheckBox,
+        checkBoxNumberscase: CheckBox,
+        checkBoxsymbols: CheckBox
     ): String {
         var allCharacters = ""
         val lengthOfInputString: Int = editText.text.toString().toInt()
         var generatedString = ""
         var characterCounter = 0
 
-        if (useUpperCase(checkBoxUpperCase.isChecked)) {
+        if (useUpperCase(checkBoxUppercase.isChecked)) {
             allCharacters += upperCaseCharacters
         }
-        if (useLowerCase(checkBoxLowerCase.isChecked)) {
+        if (useLowerCase(checkBoxLowercase.isChecked)) {
             allCharacters += lowerCaseCharacters
         }
-        if (useNumbers(checkBoxNumbersCase.isChecked)) {
+        if (useNumbers(checkBoxNumberscase.isChecked)) {
             allCharacters += numbersCaseCharacters
         }
-        if (useSymbols(checkBoxSymbols.isChecked)) {
+        if (useSymbols(checkBoxsymbols.isChecked)) {
             allCharacters += symbolsCaseCharacters
         }
         val random = Random()
+        val charactersQuantity = allCharacters.length
         while (characterCounter != lengthOfInputString) {
-            val charactersQuantity = allCharacters.length
             generatedString += allCharacters[random.nextInt(charactersQuantity)].toString()
             characterCounter += 1
         }
-        Log.e("testing", generatedString)
-        return "a"
+        return generatedString
     }
 }

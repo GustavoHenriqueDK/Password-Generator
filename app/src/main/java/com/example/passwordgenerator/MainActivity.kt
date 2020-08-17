@@ -1,14 +1,14 @@
 package com.example.passwordgenerator
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.Button
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.passwordgenerator.controller.MainActivityController
-import com.example.passwordgenerator.controller.RandomPasswordGenerator
 import com.github.rtoshiro.util.format.SimpleMaskFormatter
 import com.github.rtoshiro.util.format.text.MaskTextWatcher
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,10 +21,21 @@ class MainActivity : AppCompatActivity() {
         passwordLengthMask()
     }
 
+    @SuppressLint("ShowToast")
     private fun buttonClick() {
         buttonGeneratePassword.setOnClickListener {
-            val randomPasswordGenerator = RandomPasswordGenerator()
-            randomPasswordGenerator.generate(editTextPasswordLength, checkBoxUppercase, checkBoxLowercase, checkBoxNumbers, checkBoxSymbols)
+            val mainActivityController = MainActivityController()
+            val generatedPassword = mainActivityController.generateRandomPassword(
+                editTextPasswordLength,
+                textInputLayoutPasswordLength,
+                checkBoxUppercase,
+                checkBoxLowercase,
+                checkBoxNumbers,
+                checkBoxSymbols
+            )
+            if (generatedPassword != (MainActivityController.PASSWORD_LENGTH_INVALID)) {
+                Log.i("this output is working ", generatedPassword)
+            }
         }
     }
 
