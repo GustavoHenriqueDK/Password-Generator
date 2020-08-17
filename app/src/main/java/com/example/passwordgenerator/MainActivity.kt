@@ -1,7 +1,7 @@
 package com.example.passwordgenerator
 
 import android.os.Bundle
-import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.passwordgenerator.controller.MainActivityController
 import com.github.rtoshiro.util.format.SimpleMaskFormatter
@@ -14,38 +14,53 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        checkBoxClick()
         passwordLengthMask()
-        test()
+    }
+
+    private fun checkBoxClick() {
+        val mainActivityController = MainActivityController()
+        checkBoxLowercase.setOnClickListener {
+            mainActivityController.enableOrDisableGenerateButton(
+                buttonGeneratePassword,
+                checkBoxUppercase,
+                checkBoxLowercase,
+                checkBoxSymbols,
+                checkBoxNumbers
+            )
+        }
+        checkBoxUppercase.setOnClickListener {
+            mainActivityController.enableOrDisableGenerateButton(
+                buttonGeneratePassword,
+                checkBoxUppercase,
+                checkBoxLowercase,
+                checkBoxSymbols,
+                checkBoxNumbers
+            )
+        }
+        checkBoxNumbers.setOnClickListener {
+            mainActivityController.enableOrDisableGenerateButton(
+                buttonGeneratePassword,
+                checkBoxUppercase,
+                checkBoxLowercase,
+                checkBoxSymbols,
+                checkBoxNumbers
+            )
+        }
+        checkBoxSymbols.setOnClickListener {
+            mainActivityController.enableOrDisableGenerateButton(
+                buttonGeneratePassword,
+                checkBoxUppercase,
+                checkBoxLowercase,
+                checkBoxSymbols,
+                checkBoxNumbers
+            )
+        }
     }
 
     private fun passwordLengthMask() {
         val simpleMaskFormatter = SimpleMaskFormatter("NN")
         val maskTextWatcher = MaskTextWatcher(editTextPasswordLength, simpleMaskFormatter)
         editTextPasswordLength.addTextChangedListener(maskTextWatcher)
-    }
-
-    private fun test() {
-        buttonGeneratePassword.setOnClickListener {
-            val mainActivityController = MainActivityController()
-            if (mainActivityController.generateRandomPassword(
-                    editTextPasswordLength,
-                    checkBoxUppercase,
-                    checkBoxLowercase,
-                    checkBoxNumbers,
-                    checkBoxSymbols
-                ) == MainActivityController.PASSWORD_LENGTH_INVALID
-            ) {
-                textInputLayoutPasswordLength.error = "Quantidade de caracteres inválida"
-            } else {
-                textInputLayoutPasswordLength.error = null
-                Log.e("testing", mainActivityController.generateRandomPassword(
-                    editTextPasswordLength,
-                    checkBoxUppercase,
-                    checkBoxLowercase,
-                    checkBoxNumbers,
-                    checkBoxSymbols
-                ))
-            }
-        }
     }
 }

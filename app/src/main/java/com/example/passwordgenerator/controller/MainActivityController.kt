@@ -1,9 +1,8 @@
 package com.example.passwordgenerator.controller
 
-import android.util.Log
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
-import java.util.*
 
 class MainActivityController {
 
@@ -16,26 +15,20 @@ class MainActivityController {
         return number <= 30 && number != 0
     }
 
-    fun generateRandomPassword(
-        editText: EditText,
-        checkBoxUpperCase: CheckBox,
-        checkBoxLowerCase: CheckBox,
-        checkBoxNumbers: CheckBox,
-        checkBoxSymbols: CheckBox
-    ): String {
-        return if (isValidPasswordLength(editText)) {
-            generateRandomPasswordAccordingSettings(editText, checkBoxUpperCase, checkBoxLowerCase, checkBoxNumbers, checkBoxSymbols)
-        } else {
-            PASSWORD_LENGTH_INVALID
-        }
+    fun generateRandomPassword(): String {
+        val randomPasswordGenerator = RandomPasswordGenerator()
+        return "test"
+        //return randomPasswordGenerator.generate()
     }
 
-    private fun generateRandomPasswordAccordingSettings(editText: EditText,
-                                                        checkBoxUpperCase: CheckBox,
-                                                        checkBoxLowerCase: CheckBox,
-                                                        checkBoxNumbers: CheckBox,
-                                                        checkBoxSymbols: CheckBox): String {
-        val random = Random()
-        return random.nextInt(10).toString()
+    fun enableOrDisableGenerateButton(
+        button: Button,
+        checkBox1: CheckBox,
+        checkBox2: CheckBox,
+        checkBox3: CheckBox,
+        checkBox4: CheckBox
+    ) {
+        button.isEnabled =
+            checkBox1.isChecked || checkBox2.isChecked || checkBox3.isChecked || checkBox4.isChecked
     }
 }
