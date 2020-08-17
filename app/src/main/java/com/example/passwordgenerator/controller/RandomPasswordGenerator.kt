@@ -54,7 +54,8 @@ class RandomPasswordGenerator {
         }
         val random = Random()
         while (characterCounter != lengthOfInputString) {
-            generatedString += allCharacters[random.nextInt(allCharacters.length)].toString()
+            val charactersQuantity = allCharacters.length
+            generatedString += allCharacters[random.nextInt(charactersQuantity)].toString()
             characterCounter += 1
         }
         Log.e("testing", generatedString)
