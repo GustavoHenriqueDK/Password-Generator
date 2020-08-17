@@ -2,6 +2,8 @@ package com.example.passwordgenerator.controller
 
 import android.util.Log
 import android.widget.CheckBox
+import android.widget.EditText
+import java.util.*
 
 class RandomPasswordGenerator {
 
@@ -27,13 +29,16 @@ class RandomPasswordGenerator {
     }
 
     fun generate(
+        editText: EditText,
         checkBoxUpperCase: CheckBox,
         checkBoxLowerCase: CheckBox,
         checkBoxNumbersCase: CheckBox,
         checkBoxSymbols: CheckBox
     ): String {
-        val charactersList = ArrayList<String>()
         var allCharacters = ""
+        val lengthOfInputString: Int = editText.text.toString().toInt()
+        var generatedString = ""
+        var characterCounter = 0
 
         if (useUpperCase(checkBoxUpperCase.isChecked)) {
             allCharacters += upperCaseCharacters
@@ -47,8 +52,12 @@ class RandomPasswordGenerator {
         if (useSymbols(checkBoxSymbols.isChecked)) {
             allCharacters += symbolsCaseCharacters
         }
-        charactersList.add(allCharacters)
-        Log.e("testing all characters", charactersList[0])
+        val random = Random()
+        while (characterCounter != lengthOfInputString) {
+            generatedString += allCharacters[random.nextInt(allCharacters.length)].toString()
+            characterCounter += 1
+        }
+        Log.e("testing", generatedString)
         return "a"
     }
 }

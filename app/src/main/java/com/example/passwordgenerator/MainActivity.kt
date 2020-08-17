@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private fun buttonClick() {
         buttonGeneratePassword.setOnClickListener {
             val randomPasswordGenerator = RandomPasswordGenerator()
-            randomPasswordGenerator.generate(checkBoxUppercase, checkBoxLowercase, checkBoxNumbers, checkBoxSymbols)
+            randomPasswordGenerator.generate(editTextPasswordLength, checkBoxUppercase, checkBoxLowercase, checkBoxNumbers, checkBoxSymbols)
         }
     }
 
