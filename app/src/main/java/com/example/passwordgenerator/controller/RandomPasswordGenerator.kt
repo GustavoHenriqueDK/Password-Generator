@@ -1,12 +1,13 @@
 package com.example.passwordgenerator.controller
 
+import android.util.Log
 import android.widget.CheckBox
 
 class RandomPasswordGenerator {
 
     private val upperCaseCharacters: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     private val lowerCaseCharacters: String = "abcdefghijklmnopqrstuvwxyz"
-    private val numbersCaseCharacters: String = "1234567890"
+    private val numbersCaseCharacters: String = "0123456789"
     private val symbolsCaseCharacters: String = "!@#$%&*"
 
     fun useUpperCase(use: Boolean): Boolean {
@@ -32,19 +33,22 @@ class RandomPasswordGenerator {
         checkBoxSymbols: CheckBox
     ): String {
         val charactersList = ArrayList<String>()
+        var allCharacters = ""
 
         if (useUpperCase(checkBoxUpperCase.isChecked)) {
-            charactersList.add(upperCaseCharacters)
+            allCharacters += upperCaseCharacters
         }
         if (useLowerCase(checkBoxLowerCase.isChecked)) {
-            charactersList.add(lowerCaseCharacters)
+            allCharacters += lowerCaseCharacters
         }
         if (useNumbers(checkBoxNumbersCase.isChecked)) {
-            charactersList.add(numbersCaseCharacters)
+            allCharacters += numbersCaseCharacters
         }
         if (useSymbols(checkBoxSymbols.isChecked)) {
-            charactersList.add(symbolsCaseCharacters)
+            allCharacters += symbolsCaseCharacters
         }
+        charactersList.add(allCharacters)
+        Log.e("testing all characters", charactersList[0])
         return "a"
     }
 }

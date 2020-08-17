@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.passwordgenerator.controller.MainActivityController
+import com.example.passwordgenerator.controller.RandomPasswordGenerator
 import com.github.rtoshiro.util.format.SimpleMaskFormatter
 import com.github.rtoshiro.util.format.text.MaskTextWatcher
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,8 +16,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        buttonClick()
         checkBoxClick()
         passwordLengthMask()
+    }
+
+    private fun buttonClick() {
+        buttonGeneratePassword.setOnClickListener {
+            val randomPasswordGenerator = RandomPasswordGenerator()
+            randomPasswordGenerator.generate(checkBoxUppercase, checkBoxLowercase, checkBoxNumbers, checkBoxSymbols)
+        }
     }
 
     private fun checkBoxClick() {
