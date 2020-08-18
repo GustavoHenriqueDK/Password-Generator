@@ -20,7 +20,9 @@ class DialogCustomGeneratedPassword(
 
     private var alertDialogView =
         activity.layoutInflater.inflate(R.layout.alert_dialog_generated_password, null).apply {
+
             textViewGeneratedPassword.text = generatedPassword
+
             imageViewCopy.setOnClickListener {
                 if (onClickListener != null) {
                     onClickListener?.onClick()
@@ -35,8 +37,13 @@ class DialogCustomGeneratedPassword(
     private val textViewGeneratedPassword: TextView =
         alertDialogView.findViewById(R.id.textViewGeneratedPassword)
 
+
     private val textViewPasswordStrength: TextView =
         alertDialogView.findViewById(R.id.textViewPasswordStrength)
+
+    fun getTextView(): TextView {
+        return textViewPasswordStrength
+    }
 
     private val imageViewCopy: ImageView = alertDialogView.findViewById(R.id.imageViewCopy)
 

@@ -1,15 +1,18 @@
 package com.example.passwordgenerator.controller
 
+import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.example.passwordgenerator.R
 import java.util.*
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 
-class RandomPasswordGenerator {
+class RandomPasswordGenerator(
+    private val context: Context
+) {
 
     private val upperCaseCharacters: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     private val lowerCaseCharacters: String = "abcdefghijklmnopqrstuvwxyz"
@@ -66,38 +69,38 @@ class RandomPasswordGenerator {
     }
 
     private fun isWeakPassword(password: String): Boolean {
-        val patternOnlyLetter = Pattern.compile("[^a-z]", Pattern.CASE_INSENSITIVE)
-        val matcher: Matcher = patternOnlyLetter.matcher(upperCaseCharacters + lowerCaseCharacters)
-        return matcher.find()
+        return password.equals(lowerCaseCharacters)
     }
 
     private fun isAveragePassword(password: String): Boolean {
-        val patternOnlyLetter = Pattern.compile("[^a-z0-9]", Pattern.CASE_INSENSITIVE)
-        val matcher: Matcher =
-            patternOnlyLetter.matcher(upperCaseCharacters + lowerCaseCharacters + numbersCaseCharacters)
-        return matcher.find()
+        return password.contains(lowerCaseCharacters + upperCaseCharacters)
     }
 
     private fun isStrengthPassword(password: String): Boolean {
-        val patternOnlyLetter = Pattern.compile("[^a-z0-9!@#$%¨&*]", Pattern.CASE_INSENSITIVE)
-        val matcher: Matcher =
-            patternOnlyLetter.matcher(upperCaseCharacters + lowerCaseCharacters + numbersCaseCharacters + symbolsCaseCharacters)
-        return matcher.find()
+        return password.contains(
+            lowerCaseCharacters + upperCaseCharacters + symbolsCaseCharacters + numbersCaseCharacters
+        )
     }
 
     fun setTextViewAccordingPasswordStrength(textView: TextView, password: String) {
-        if (isWeakPassword(password)) {
-            textView.setText(R.string.weak_password)
-            textView.setTextColor(Color.parseColor(R.color.colorRed.toString()))
+        val myPassword = lowerCaseCharacters
+        if (isWeakPassword(myPassword)) {
+            Log.e("weak", "a")
+            textView.text = "Weak"
+            textView.setTextColor(ContextCompat.getColor(context, R.color.colorRed))
         }
-        if (isAveragePassword(password)) {
-            textView.setText(R.string.average_password)
-            textView.setTextColor(Color.parseColor(R.color.colorYellow.toString()))
+        if (isAveragePassword(myPassword)) {
+            Log.e("average", "a")
+            textView.text = "Average"
+            textView.setTextColor(ContextCompat.getColor(context, R.color.colorYellow))
         }
-        if (isStrengthPassword(password)) {
-            textView.setText(R.string.strength_password)
-            textView.setTextColor(Color.parseColor(R.color.colorGreen.toString()))
+        if (isStrengthPassword(myPassword)) {
+            Log.e("strenght", "a")
+            textView.text = "Strength"
+            textView.setTextColor(ContextCompat.getColor(context, R.color.colorGreen))
+        } else {
+            textView.text = "WTF?!"
+            textView.setTextColor(ContextCompat.getColor(context, R.color.colorRed))
         }
     }
-
 }

@@ -1,11 +1,14 @@
 package com.example.passwordgenerator.controller
 
+import android.content.Context
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import com.google.android.material.textfield.TextInputLayout
 
-class MainActivityController {
+class MainActivityController(
+    private val context: Context
+) {
 
     companion object {
         const val PASSWORD_LENGTH_INVALID = "password_length_invalid"
@@ -16,14 +19,27 @@ class MainActivityController {
         return number <= 30 && number != 0
     }
 
-    fun generateRandomPassword(editText: EditText, textInputLayout: TextInputLayout, checkBoxUppercase: CheckBox, checkBoxLowercase: CheckBox, checkBoxNumber: CheckBox, checkBoxSymbol: CheckBox): String {
-        val randomPasswordGenerator = RandomPasswordGenerator()
-        return if (!isValidPasswordLength(editText)) {
+    fun generateRandomPassword(
+        editText: EditText,
+        textInputLayout: TextInputLayout,
+        checkBoxUppercase: CheckBox,
+        checkBoxLowercase: CheckBox,
+        checkBoxNumber: CheckBox,
+        checkBoxSymbol: CheckBox
+    ): String {
+        val randomPasswordGenerator = RandomPasswordGenerator(context)
+        return if (editText.text.toString().isEmpty() || !isValidPasswordLength(editText)) {
             textInputLayout.error = "Quantidade de caracteres inválida"
             PASSWORD_LENGTH_INVALID
         } else {
             textInputLayout.error = null
-            randomPasswordGenerator.generate(editText, checkBoxUppercase, checkBoxLowercase, checkBoxNumber, checkBoxSymbol)
+            randomPasswordGenerator.generate(
+                editText,
+                checkBoxUppercase,
+                checkBoxLowercase,
+                checkBoxNumber,
+                checkBoxSymbol
+            )
         }
     }
 
