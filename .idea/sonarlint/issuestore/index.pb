@@ -1,8 +1,6 @@
 
 e
 5app/src/main/res/drawable/constraint_layout_shape.xml,6\7\674a3ed017676a1760b054242a2dcdd8b1bb7cbc
-R
-"app/src/main/res/values/colors.xml,9\6\969faa2a5d9f5e8390e958d2c07f2cfd54676e6b
 b
 2app/src/main/res/drawable/spinner_layout_shape.xml,0\e\0e9f603881720877cd0ac201dc940964a8937ad4
 P

@@ -1,7 +1,6 @@
 package com.example.passwordgenerator.view.dialog
 
 import android.app.Activity
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.passwordgenerator.R
@@ -21,7 +20,9 @@ class DialogCustomGeneratedPassword(
 
     private var alertDialogView =
         activity.layoutInflater.inflate(R.layout.alert_dialog_generated_password, null).apply {
+
             textViewGeneratedPassword.text = generatedPassword
+
             imageViewCopy.setOnClickListener {
                 if (onClickListener != null) {
                     onClickListener?.onClick()
@@ -36,9 +37,18 @@ class DialogCustomGeneratedPassword(
     private val textViewGeneratedPassword: TextView =
         alertDialogView.findViewById(R.id.textViewGeneratedPassword)
 
+
+    private val textViewPasswordStrength: TextView =
+        alertDialogView.findViewById(R.id.textViewPasswordStrength)
+
+    fun getTextView(): TextView {
+        return textViewPasswordStrength
+    }
+
     private val imageViewCopy: ImageView = alertDialogView.findViewById(R.id.imageViewCopy)
 
     private var currentDialog: androidx.appcompat.app.AlertDialog? = null
+
     private var onDialogClickListener: OnClickListener? = null
 
     fun showDialog() {
