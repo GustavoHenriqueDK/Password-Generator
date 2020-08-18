@@ -1,12 +1,9 @@
 package com.example.passwordgenerator
 
 import android.annotation.SuppressLint
-import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.passwordgenerator.controller.MainActivityController
@@ -40,7 +37,8 @@ class MainActivity : AppCompatActivity() {
                 checkBoxSymbols
             )
             if (generatedPassword != (MainActivityController.PASSWORD_LENGTH_INVALID)) {
-                val dialogCustomGeneratedPassword = DialogCustomGeneratedPassword(this, generatedPassword)
+                val dialogCustomGeneratedPassword =
+                    DialogCustomGeneratedPassword(this, generatedPassword)
 
                 dialogCustomGeneratedPassword.setOnClickListenerInImageView(object :
                     DialogCustomGeneratedPassword.OnClickListener {
@@ -50,7 +48,6 @@ class MainActivity : AppCompatActivity() {
                             .show()
                     }
                 })
-
                 dialogCustomGeneratedPassword.showDialog()
             }
         }
@@ -58,8 +55,8 @@ class MainActivity : AppCompatActivity() {
 
     fun copyToClipboard(text: String) {
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText("label", text)
-        //clipboard.primaryClip = clip
+        @Deprecated("Any other way to do that?")
+        clipboard.text = text
     }
 
     private fun checkBoxClick() {
