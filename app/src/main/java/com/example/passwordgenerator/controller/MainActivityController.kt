@@ -28,7 +28,7 @@ class MainActivityController(
         checkBoxSymbol: CheckBox
     ): String {
         val randomPasswordGenerator = RandomPasswordGenerator(context)
-        return if (editText.text.toString().isEmpty() || !isValidPasswordLength(editText)) {
+        return if (textIsEmpty(editText) || !isValidPasswordLength(editText)) {
             textInputLayout.error = "Quantidade de caracteres inválida"
             PASSWORD_LENGTH_INVALID
         } else {
@@ -41,6 +41,10 @@ class MainActivityController(
                 checkBoxSymbol
             )
         }
+    }
+
+    private fun textIsEmpty(editText: EditText): Boolean {
+        return editText.text.toString().isEmpty()
     }
 
     fun enableOrDisableGenerateButton(

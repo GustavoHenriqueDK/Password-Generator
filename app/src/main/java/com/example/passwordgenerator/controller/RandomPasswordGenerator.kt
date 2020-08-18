@@ -1,8 +1,7 @@
 package com.example.passwordgenerator.controller
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
-import android.util.Log
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
@@ -68,39 +67,35 @@ class RandomPasswordGenerator(
         return generatedString
     }
 
+    /** Simple password strength verification. */
     private fun isWeakPassword(password: String): Boolean {
-        return password.equals(lowerCaseCharacters)
+        return password.length <= 10
     }
 
     private fun isAveragePassword(password: String): Boolean {
-        return password.contains(lowerCaseCharacters + upperCaseCharacters)
+        return password.length in 11..20
     }
 
     private fun isStrengthPassword(password: String): Boolean {
-        return password.contains(
-            lowerCaseCharacters + upperCaseCharacters + symbolsCaseCharacters + numbersCaseCharacters
-        )
+        return password.length >= 21
     }
 
+
+    @SuppressLint("SetTextI18n")
     fun setTextViewAccordingPasswordStrength(textView: TextView, password: String) {
-        val myPassword = lowerCaseCharacters
-        if (isWeakPassword(myPassword)) {
-            Log.e("weak", "a")
-            textView.text = "Weak"
-            textView.setTextColor(ContextCompat.getColor(context, R.color.colorRed))
-        }
-        if (isAveragePassword(myPassword)) {
-            Log.e("average", "a")
-            textView.text = "Average"
-            textView.setTextColor(ContextCompat.getColor(context, R.color.colorYellow))
-        }
-        if (isStrengthPassword(myPassword)) {
-            Log.e("strenght", "a")
-            textView.text = "Strength"
-            textView.setTextColor(ContextCompat.getColor(context, R.color.colorGreen))
-        } else {
-            textView.text = "WTF?!"
-            textView.setTextColor(ContextCompat.getColor(context, R.color.colorRed))
+        when {
+            isWeakPassword(password) -> {
+                textView.text = "Fraca"
+                textView.setTextColor(ContextCompat.getColor(context, R.color.colorRed));
+            }
+            isAveragePassword(password) -> {
+                textView.text = "Média"
+                textView.setTextColor(ContextCompat.getColor(context, R.color.colorYellow));
+            }
+            isStrengthPassword(password) -> {
+                textView.text = "Forte"
+                textView.setTextColor(ContextCompat.getColor(context, R.color.colorGreen));
+            }
         }
     }
 }
