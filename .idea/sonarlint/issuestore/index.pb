@@ -17,3 +17,9 @@ Uapp/src/main/java/com/example/passwordgenerator/controller/RandomPasswordGenera
 Tapp/src/main/java/com/example/passwordgenerator/controller/MainActivityController.kt,e\4\e4e692479d30ddaa63af484a7f72db6736b42fd7
 Œ
 \app/src/main/java/com/example/passwordgenerator/view/dialog/DialogCustomGeneratedPassword.kt,b\6\b64c47c5cf27e9f192f49ae86268a4fc72f3d231
+Y
+)app/src/main/res/layout/activity_main.xml,7\6\76b07e40f24cce093536731477540f12e7da3cb6
+R
+"app/src/main/res/values/colors.xml,9\6\969faa2a5d9f5e8390e958d2c07f2cfd54676e6b
+k
+;app/src/main/res/layout/alert_dialog_generated_password.xml,4\9\4961645b3df93ea7ca97c461f598461e34bf1d6b

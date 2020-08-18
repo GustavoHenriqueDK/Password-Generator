@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Password Generator</string>
+    <string name="app_name">Gerador de senhas</string>
     <string name="quantidade_de_caracteres">Quantidade de caracteres (máx. 30)</string>
     <string name="text_copied">Senha copiada!</string>
     <string name="weak_password">Fraca</string>
