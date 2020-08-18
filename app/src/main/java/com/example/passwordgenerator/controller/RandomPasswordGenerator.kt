@@ -1,9 +1,13 @@
 package com.example.passwordgenerator.controller
 
-import android.util.Log
+import android.graphics.Color
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.TextView
+import com.example.passwordgenerator.R
 import java.util.*
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 class RandomPasswordGenerator {
 
@@ -60,4 +64,40 @@ class RandomPasswordGenerator {
         }
         return generatedString
     }
+
+    private fun isWeakPassword(password: String): Boolean {
+        val patternOnlyLetter = Pattern.compile("[^a-z]", Pattern.CASE_INSENSITIVE)
+        val matcher: Matcher = patternOnlyLetter.matcher(upperCaseCharacters + lowerCaseCharacters)
+        return matcher.find()
+    }
+
+    private fun isAveragePassword(password: String): Boolean {
+        val patternOnlyLetter = Pattern.compile("[^a-z0-9]", Pattern.CASE_INSENSITIVE)
+        val matcher: Matcher =
+            patternOnlyLetter.matcher(upperCaseCharacters + lowerCaseCharacters + numbersCaseCharacters)
+        return matcher.find()
+    }
+
+    private fun isStrengthPassword(password: String): Boolean {
+        val patternOnlyLetter = Pattern.compile("[^a-z0-9!@#$%¨&*]", Pattern.CASE_INSENSITIVE)
+        val matcher: Matcher =
+            patternOnlyLetter.matcher(upperCaseCharacters + lowerCaseCharacters + numbersCaseCharacters + symbolsCaseCharacters)
+        return matcher.find()
+    }
+
+    fun setTextViewAccordingPasswordStrength(textView: TextView, password: String) {
+        if (isWeakPassword(password)) {
+            textView.setText(R.string.weak_password)
+            textView.setTextColor(Color.parseColor(R.color.colorRed.toString()))
+        }
+        if (isAveragePassword(password)) {
+            textView.setText(R.string.average_password)
+            textView.setTextColor(Color.parseColor(R.color.colorYellow.toString()))
+        }
+        if (isStrengthPassword(password)) {
+            textView.setText(R.string.strength_password)
+            textView.setTextColor(Color.parseColor(R.color.colorGreen.toString()))
+        }
+    }
+
 }
